@@ -25,12 +25,13 @@ Um valor real indicando o ICM da comunicação dos Palatír de Sauron e Saruman,
 
 SOLUÇÃO ABAIXO:
 """
-entrada = input().split()
-distancia = int(entrada[0])
-diametro1 = int(entrada[1])
-diametro2 = int(entrada[2])
+def calcular_ICM(N, X, Y):
+    ICM = N / (X + Y)
+    return "{:.2f}".format(ICM)
 
-soma = (diametro1 + diametro2)
-resultado = distancia / soma
+# Entrada
+N, X, Y = map(int, input().split())
 
-print(f"{resultado:2.2f}")
+# Calcular e imprimir o ICM
+resultado_ICM = calcular_ICM(N, X, Y)
+print(resultado_ICM)

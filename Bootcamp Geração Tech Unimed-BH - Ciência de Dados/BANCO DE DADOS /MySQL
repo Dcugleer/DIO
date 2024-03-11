@@ -1,0 +1,54 @@
+#comando basicos mySQL
+
+
+SELECT: Selecionar
+INSERT INTO: Inserir em
+UPDATE: Atualizar
+DELETE: Excluir
+CREATE TABLE: Criar tabela
+ALTER TABLE: Alterar tabela
+DROP TABLE: Excluir tabela
+GROUP BY: Agrupar por
+ORDER BY: Ordenar por
+JOIN: Juntar
+
+Conectar a la base de datos:
+mysql -u usuario -p contraseña
+
+Seleccionar una base de datos:
+USE nombre_base_de_datos;
+
+Mostrar todas las bases de datos:
+SHOW DATABASES;
+
+Mostrar todas las tablas en una base de datos:
+SHOW TABLES;
+
+Mostrar la estructura de una tabla
+DESCRIBE nombre_tabla;
+
+Crear una nueva base de datos:
+CREATE DATABASE nombre_base_de_datos;
+
+Crear una nueva tabla:
+CREATE TABLE nombre_tabla (
+    columna1 tipo_de_dato,
+    columna2 tipo_de_dato,
+    ...
+);
+
+Insertar un nuevo registro en una tabla:
+INSERT INTO nombre_tabla (columna1, columna2, ...) VALUES (valor1, valor2, ...);
+
+Actualizar un registro en una tabla:
+UPDATE nombre_tabla SET columna1 = valor1, columna2 = valor2 WHERE condición;
+
+Eliminar registros de una tabla:
+DELETE FROM nombre_tabla WHERE condición;
+
+
+
+
+
+
+

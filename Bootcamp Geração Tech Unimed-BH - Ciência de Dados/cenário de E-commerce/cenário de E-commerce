@@ -1,1 +1,49 @@
+SQL
+
+Neste esquema, temos quatro tabelas principais:
+
+Cliente: Armazena informações sobre os clientes, como nome, email e endereço. O id_cliente é a chave primária.
+Produto: Contém informações sobre os produtos disponíveis, como nome, descrição e preço. O id_produto é a chave primária.
+Pedido: Representa os pedidos feitos pelos clientes. Ele contém informações como a data do pedido, o status e uma referência ao cliente que fez o pedido (id_cliente). O id_pedido é a chave primária e id_cliente é uma chave estrangeira referenciando a tabela Cliente.
+ItemPedido: Esta tabela é uma tabela de junção entre Pedido e Produto. Ela armazena os produtos específicos que foram incluídos em cada pedido, juntamente com a quantidade e o preço unitário. id_item é a chave primária, id_pedido é uma chave estrangeira referenciando a tabela Pedido e id_produto é uma chave estrangeira referenciando a tabela Produto.
+Esse esquema conceitual captura as relações básicas necessárias para modelar um sistema de e-commerce simples.
+
+
+
+
+
+
+
+
+CREATE TABLE Cliente (
+    id_cliente INT PRIMARY KEY,
+    nome VARCHAR(100),
+    email VARCHAR(100),
+    endereco VARCHAR(255)
+);
+
+CREATE TABLE Produto (
+    id_produto INT PRIMARY KEY,
+    nome VARCHAR(100),
+    descricao TEXT,
+    preco DECIMAL(10, 2)
+);
+
+CREATE TABLE Pedido (
+    id_pedido INT PRIMARY KEY,
+    id_cliente INT,
+    data_pedido DATE,
+    status VARCHAR(20),
+    FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente)
+);
+
+CREATE TABLE ItemPedido (
+    id_item INT PRIMARY KEY,
+    id_pedido INT,
+    id_produto INT,
+    quantidade INT,
+    preco_unitario DECIMAL(10, 2),
+    FOREIGN KEY (id_pedido) REFERENCES Pedido(id_pedido),
+    FOREIGN KEY (id_produto) REFERENCES Produto(id_produto)
+);
 

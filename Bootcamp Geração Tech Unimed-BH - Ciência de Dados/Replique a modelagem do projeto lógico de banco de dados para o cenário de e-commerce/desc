@@ -1,0 +1,50 @@
+Tabela Cliente:
+
+id_cliente (Chave Primária)
+tipo_cliente (PF ou PJ)
+Outros atributos como nome, endereço, etc.
+Tabela Conta:
+
+id_conta (Chave Primária)
+id_cliente (Chave Estrangeira referenciando a tabela Cliente)
+Outros atributos como email, senha, etc.
+Tabela Forma_Pagamento:
+
+id_forma_pagamento (Chave Primária)
+descricao (ex: Cartão de Crédito, Boleto, etc.)
+Tabela Cliente_Forma_Pagamento (para representar a relação muitos-para-muitos entre Cliente e Forma_Pagamento):
+
+id_cliente
+id_forma_pagamento
+Tabela Pedido:
+
+id_pedido (Chave Primária)
+id_cliente (Chave Estrangeira referenciando a tabela Cliente)
+Outros atributos como data do pedido, total, etc.
+Tabela Item_Pedido (para representar os itens de cada pedido):
+
+id_item_pedido (Chave Primária)
+id_pedido (Chave Estrangeira referenciando a tabela Pedido)
+id_produto (Chave Estrangeira referenciando a tabela Produto)
+quantidade
+preco_unitario
+Tabela Produto:
+
+id_produto (Chave Primária)
+Outros atributos como nome, descrição, etc.
+Tabela Fornecedor:
+
+id_fornecedor (Chave Primária)
+Outros atributos como nome, endereço, etc.
+Tabela Estoque:
+
+id_estoque (Chave Primária)
+id_produto (Chave Estrangeira referenciando a tabela Produto)
+id_fornecedor (Chave Estrangeira referenciando a tabela Fornecedor)
+quantidade
+Tabela Entrega:
+
+id_entrega (Chave Primária)
+id_pedido (Chave Estrangeira referenciando a tabela Pedido)
+status
+codigo_rastreio

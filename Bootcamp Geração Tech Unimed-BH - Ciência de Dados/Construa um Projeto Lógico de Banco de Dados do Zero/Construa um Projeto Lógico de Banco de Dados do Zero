@@ -1,0 +1,98 @@
+Clientes:
+
+id_cliente (Chave Primária)
+nome
+telefone
+endereço
+Veículos:
+
+id_veiculo (Chave Primária)
+modelo
+marca
+ano
+placa
+id_cliente (Chave Estrangeira referenciando a tabela Clientes)
+Ordens de Serviço:
+
+id_ordem (Chave Primária)
+data
+id_veiculo (Chave Estrangeira referenciando a tabela Veículos)
+descrição
+valor_total
+Itens de Serviço:
+
+id_item (Chave Primária)
+id_ordem (Chave Estrangeira referenciando a tabela Ordens de Serviço)
+serviço
+preço
+
+
+
+
+
+
+Queries SQL:
+Recuperação simples com SELECT Statement:
+SELECT * FROM Clientes;
+
+Filtros com WHERE Statement:
+SELECT * FROM Veiculos WHERE marca = 'Toyota';
+
+Crie expressões para gerar atributos derivados:
+SELECT id_ordem, descricao, valor_total * 0.1 AS desconto FROM Ordens_de_Servico;
+
+Defina ordenações dos dados com ORDER BY:
+SELECT * FROM Veiculos ORDER BY ano DESC;
+
+Condições de filtros aos grupos – HAVING Statement:
+SELECT id_cliente, COUNT(*) AS total_ordens FROM Veiculos GROUP BY id_cliente HAVING total_ordens > 2;
+
+Crie junções entre tabelas para fornecer uma perspectiva mais complexa dos dados:
+SELECT c.nome, v.modelo, o.descricao
+FROM Clientes c
+INNER JOIN Veiculos v ON c.id_cliente = v.id_cliente
+INNER JOIN Ordens_de_Servico o ON v.id_veiculo = o.id_veiculo;
+
+
+
+
+
+SQL
+
+
+CREATE TABLE Clientes (
+    id_cliente INT PRIMARY KEY,
+    nome VARCHAR(100),
+    telefone VARCHAR(20),
+    endereco VARCHAR(255)
+);
+
+CREATE TABLE Veiculos (
+    id_veiculo INT PRIMARY KEY,
+    modelo VARCHAR(50),
+    marca VARCHAR(50),
+    ano INT,
+    placa VARCHAR(10),
+    id_cliente INT,
+    FOREIGN KEY (id_cliente) REFERENCES Clientes(id_cliente)
+);
+
+CREATE TABLE Ordens_de_Servico (
+    id_ordem INT PRIMARY KEY,
+    data DATE,
+    id_veiculo INT,
+    descricao TEXT,
+    valor_total DECIMAL(10, 2),
+    FOREIGN KEY (id_veiculo) REFERENCES Veiculos(id_veiculo)
+);
+
+CREATE TABLE Itens_de_Servico (
+    id_item INT PRIMARY KEY,
+    id_ordem INT,
+    servico VARCHAR(255),
+    preco DECIMAL(10, 2),
+    FOREIGN KEY (id_ordem) REFERENCES Ordens_de_Servico(id_ordem)
+);
+
+
+

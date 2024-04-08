@@ -1,0 +1,102 @@
+-- Criação das Tabelas
+CREATE TABLE Cliente (
+    id_cliente INT PRIMARY KEY,
+    tipo_cliente VARCHAR(2)
+    -- outros atributos
+);
+
+CREATE TABLE Conta (
+    id_conta INT PRIMARY KEY,
+    id_cliente INT,
+    FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente)
+    -- outros atributos
+);
+
+CREATE TABLE Forma_Pagamento (
+    id_forma_pagamento INT PRIMARY KEY,
+    descricao VARCHAR(50)
+    -- outros atributos
+);
+
+CREATE TABLE Cliente_Forma_Pagamento (
+    id_cliente INT,
+    id_forma_pagamento INT,
+    FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente),
+    FOREIGN KEY (id_forma_pagamento) REFERENCES Forma_Pagamento(id_forma_pagamento)
+);
+
+CREATE TABLE Pedido (
+    id_pedido INT PRIMARY KEY,
+    id_cliente INT,
+    FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente)
+    -- outros atributos
+);
+
+CREATE TABLE Item_Pedido (
+    id_item_pedido INT PRIMARY KEY,
+    id_pedido INT,
+    id_produto INT,
+    quantidade INT,
+    preco_unitario DECIMAL(10,2),
+    FOREIGN KEY (id_pedido) REFERENCES Pedido(id_pedido),
+    FOREIGN KEY (id_produto) REFERENCES Produto(id_produto)
+);
+
+CREATE TABLE Produto (
+    id_produto INT PRIMARY KEY
+    -- outros atributos
+);
+
+CREATE TABLE Fornecedor (
+    id_fornecedor INT PRIMARY KEY
+    -- outros atributos
+);
+
+CREATE TABLE Estoque (
+    id_estoque INT PRIMARY KEY,
+    id_produto INT,
+    id_fornecedor INT,
+    quantidade INT,
+    FOREIGN KEY (id_produto) REFERENCES Produto(id_produto),
+    FOREIGN KEY (id_fornecedor) REFERENCES Fornecedor(id_fornecedor)
+);
+
+CREATE TABLE Entrega (
+    id_entrega INT PRIMARY KEY,
+    id_pedido INT,
+    status VARCHAR(50),
+    codigo_rastreio VARCHAR(20),
+    FOREIGN KEY (id_pedido) REFERENCES Pedido(id_pedido)
+);
+
+-- Consultas
+
+-- 1. Quantos pedidos foram feitos por cada cliente?
+SELECT c.id_cliente, COUNT(p.id_pedido) AS total_pedidos
+FROM Cliente c
+LEFT JOIN Pedido p ON c.id_cliente = p.id_cliente
+GROUP BY c.id_cliente;
+
+-- 2. Algum vendedor também é fornecedor?
+SELECT COUNT(*) AS total_vendedores_fornecedores
+FROM (
+    SELECT id_fornecedor
+    FROM Fornecedor
+    
+    INTERSECT
+    
+    SELECT id_cliente
+    FROM Cliente
+) AS vendedores_fornecedores;
+
+-- 3. Relação de produtos fornecedores e estoques
+SELECT p.id_produto, f.id_fornecedor, e.quantidade
+FROM Produto p
+JOIN Estoque e ON p.id_produto = e.id_produto
+JOIN Fornecedor f ON e.id_fornecedor = f.id_fornecedor;
+
+-- 4. Relação de nomes dos fornecedores e nomes dos produtos
+SELECT f.nome AS nome_fornecedor, p.nome AS nome_produto
+FROM Fornecedor f
+JOIN Estoque e ON f.id_fornecedor = e.id_fornecedor
+JOIN Produto p ON e.id_produto = p.id_produto;

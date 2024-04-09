@@ -1,0 +1,21 @@
+Descrição do Desafio
+Características Relacionais (SQL) e Não Relacionais (NoSQL) usando o mesmo banco de dados? Isso é possível? Com o DynamoDB sim! Entenda um pouco das possibilidades desse banco de dados totalmente gerenciado da AWS. Para isso, nosso super expert apresenta uma série de boas práticas para o DynamoDB em um desafio totalmente prático. Sendo assim, você poderá reproduzir essa solução e, caso queira ir além, implementar suas próprias evoluções e melhorias wink
+
+Dica: você pode dar um "fork" no repositório para organizar melhor as suas alterações e evoluções, mantendo uma referência direta ao código original.
+
+
+
+
+Modelagem de Dados Flexível: O DynamoDB permite que você modele seus dados de acordo com os requisitos do seu aplicativo. Você pode ter tabelas que seguem um modelo de chave-valor (NoSQL) para armazenar dados não relacionais e, ao mesmo tempo, utilizar recursos como índices globais secundários (GSI) para suportar consultas relacionais.
+
+Utilização de Chaves Primárias Eficientes: Projete suas tabelas com chaves primárias eficientes para suportar tanto consultas de acesso rápido quanto operações de junção. As chaves primárias compostas podem ser úteis para modelar relacionamentos entre entidades.
+
+Índices Globais Secundários (GSI): Use GSIs para criar índices adicionais em suas tabelas, permitindo consultas flexíveis e eficientes. Isso é útil para consultas relacionais que não são diretamente suportadas pela estrutura de chave-valor principal.
+
+Transações (Atomicidade): DynamoDB oferece suporte a transações ACID para garantir atomicidade em operações que envolvem várias tabelas ou itens. Isso é crucial para garantir a integridade dos dados, especialmente em operações relacionais complexas.
+
+Padrões de Acesso e Modelagem: Ao modelar seus dados, leve em consideração os padrões de acesso e consultas do seu aplicativo. Isso ajudará a otimizar o desempenho e a eficiência das operações no DynamoDB.
+
+Monitoramento e Otimização: Utilize as ferramentas de monitoramento e otimização oferecidas pela AWS para acompanhar o desempenho do seu banco de dados e ajustar as configurações conforme necessário. Isso inclui ajustes de capacidade, otimização de consultas e utilização de caches.
+
+Ao implementar essas práticas recomendadas, você poderá criar uma solução que aproveite tanto as características relacionais quanto não relacionais do DynamoDB, permitindo flexibilidade e desempenho para uma variedade de aplicativos e casos de uso.
